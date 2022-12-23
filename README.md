@@ -1,7 +1,7 @@
 # [Django Bitcoin Price listings using CoinMarketcap Api] 
 
 - ✅ Responsive mobile first view
--.✅ Background take to populate Django database with new updates from coinmarketcap API every 5 mins
+-.✅ Background tasks to populate Django database with new updates from coinmarketcap API every 5 mins
 - ✅ Inline rows edit/delete activated at double click for edit coin data
 - ✅ Realtime Search functionality while typing
 - ✅ Display graph in Django app from data sync to db from open source api
