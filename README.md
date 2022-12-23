@@ -1,12 +1,11 @@
-# [Django Datatables Sample](https://django-datatables-sample.appseed.us/)
+# [Django Bitcoin Price listings using CoinMarketcap Api
 
-> Playground starter to manage a DataTable in **Django** - [LIVE Demo](https://django-datatables-sample.appseed.us/)
-
-- ✅ Load sample data using admin section
-- ✅ Inline rows edit activated at double click
-- ✅ Pagination and Search  
-- ✅ Deployment scripts: `Docker`
-- ✅ Free [Support](https://appseed.us/support/) via `Email` and `Discord`
+- ✅ Responsive mobile first view
+-.✅ Background take to populate Django database with new updates from coinmarketcap API every 5 mins
+- ✅ Inline rows edit/delete activated at double click for edit coin data
+- ✅ Realtime Search functionality while typing
+- ✅ Display graph in Django app from data sync to db from open source api
+- ✅ Deployment scripts with Docker and MySql for django database 
 
 <br />
 
@@ -48,84 +47,6 @@ $ # Access the web app in browser: http://127.0.0.1:8000/
 
 <br />
 
-## Load Data For Datatable
-
-In Django admin, you can import data for the **Transaction** section. 
-To do this just click on ```IMPORT``` button then select your csv, xls or etc file and submit it.
-
-![Import Data](https://raw.githubusercontent.com/app-generator/django-datatables-sample/master/media/transactions_screenshot_3.png)
-
-> Sample **[Data](https://github.com/app-generator/django-datatables-sample/blob/master/sample_data/transactions_data.csv)**
-
-### Datatable for transactions
-* Imported information is displayed in the **Transactions** section. 
-
-![Django Dashboard Volt - Template project provided by AppSeed.](https://raw.githubusercontent.com/app-generator/django-datatables-sample/master/media/transactions_screenshot_1.png)
-
-* In this section, you can *search*, *edit*, and *delete* the transactions. The added features of this **datatable** are:
-    - Paginated information (transaction page) with usable controls: PREV, 1,2,3., NEXT
-    - Search box to filter
-    - Delete row control
-    - edit cel data on double click and ENTER on confirm.
-
-![Django Dashboard Volt - Template project provided by AppSeed.](https://raw.githubusercontent.com/app-generator/django-datatables-sample/master/media/transactions_screenshot_2.png)
- 
-<br>
-
-## Code-base structure
-
-The project is coded using a simple and intuitive structure presented bellow:
-
-```bash
-< PROJECT ROOT >
-   |
-   |-- core/                               # Implements app logic and serve the static assets
-   |    |-- settings.py                    # Django app bootstrapper
-   |    |-- wsgi.py                        # Start the app in production
-   |    |-- urls.py                        # Define URLs served by all apps/nodes
-   |    |
-   |    |-- static/
-   |    |    |-- <css, JS, images>         # CSS files, Javascripts files
-   |    |
-   |    |-- templates/                     # Templates used to render pages
-   |         |
-   |         |-- includes/                 # HTML chunks and components
-   |         |    |-- navigation.html      # Top menu component
-   |         |    |-- sidebar.html         # Sidebar component
-   |         |    |-- footer.html          # App Footer
-   |         |    |-- scripts.html         # Scripts common to all pages
-   |         |
-   |         |-- layouts/                  # Master pages
-   |         |    |-- base-fullscreen.html # Used by Authentication pages
-   |         |    |-- base.html            # Used by common pages
-   |         |
-   |         |-- accounts/                 # Authentication pages
-   |         |    |-- login.html           # Login page
-   |         |    |-- register.html        # Register page
-   |         |
-   |      index.html                       # The default page
-   |     page-404.html                     # Error 404 page
-   |     page-500.html                     # Error 404 page
-   |       *.html                          # All other HTML pages
-   |
-   |-- authentication/                     # Handles auth routes (login and register)
-   |    |
-   |    |-- urls.py                        # Define authentication routes  
-   |    |-- views.py                       # Handles login and registration  
-   |    |-- forms.py                       # Define auth forms  
-   |
-   |-- app/                                # A simple app that serve HTML files
-   |    |
-   |    |-- views.py                       # Serve HTML pages for authenticated users
-   |    |-- urls.py                        # Define some super simple routes  
-   |
-   |-- requirements.txt                    # Development modules - SQLite storage
-   |
-   |-- .env                                # Inject Configuration via Environment
-   |-- manage.py                           # Start the app - Django default start script
-   |
-   |-- ************************************************************************
-```
 
 <br />
 
@@ -179,41 +100,12 @@ $ pip install gunicorn
 ```bash
 $ gunicorn --bind=0.0.0.0:8001 core.wsgi:application
 Serving on http://localhost:8001
-```
-
-Visit `http://localhost:8001` in your browser. The app should be up & running.
-
-
+``
 <br />
 
-### [Waitress](https://docs.pylonsproject.org/projects/waitress/en/stable/)
----
 
 Waitress (Gunicorn equivalent for Windows) is meant to be a production-quality pure-Python WSGI server with very acceptable performance. It has no dependencies except ones that live in the Python standard library.
 
 > Install using pip
 
-```bash
-$ pip install waitress
 ```
-> Start the app using [waitress-serve](https://docs.pylonsproject.org/projects/waitress/en/stable/runner.html)
-
-```bash
-$ waitress-serve --port=8001 core.wsgi:application
-Serving on http://localhost:8001
-```
-
-Visit `http://localhost:8001` in your browser. The app should be up & running.
-
-<br />
-
-## Credits & Links
-
-- [Django](https://www.djangoproject.com/) - The official website
-- [Boilerplate Code](https://appseed.us/boilerplate-code) - Index provided by **AppSeed**
-- [Boilerplate Code](https://github.com/app-generator/boilerplate-code) - Index published on Github
-
-<br />
-
----
-[Django Datatables Sample](https://django-datatables-sample.appseed.us/) - Provided by **AppSeed** [Web App Generator](https://appseed.us/app-generator).
