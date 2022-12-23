@@ -2,7 +2,7 @@
 
 - ✅ Responsive mobile first view
 -.✅ Background tasks to populate Django database with new updates from coinmarketcap API every 5 mins
-- ✅ Inline rows edit/delete activated at double click for edit coin data
+- ✅ Inline rows edit/delete activated at double click on coin data item
 - ✅ Realtime Search functionality while typing
 - ✅ Display graph in Django app from data sync to db from open source api
 - ✅ Deployment scripts with Docker and MySql for django database 
