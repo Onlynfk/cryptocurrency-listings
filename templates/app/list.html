@@ -1,0 +1,27 @@
+<div class="row mt-5">
+    
+  
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">USD($)</th>
+            <th scope="col">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {% for coin in coins %}
+            <td>{{coin.coin_name}}</td>
+            <td>{{coin.price}}</td>
+            <td>{{coin.date_last_updated}}</td>
+            <td><button type="button" class="btn btn-secondary btn-sm">Edit</button>
+            </td>
+            <td><button type="button" class="btn btn-danger btn-sm">Delete</button>
+            </td>
+          </tr>
+          {% endfor %}
+          
+        </tbody>
+      </table>
+  </div>

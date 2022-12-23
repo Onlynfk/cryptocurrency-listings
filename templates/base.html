@@ -1,0 +1,48 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+  <!-- JQuery CDN -->
+
+  <script src="{% static 'javascript/jquery-3.4.1.min.js' %}"></script>
+
+  <!-- FontAwesome CDN -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+  <link href="{% static "main.css" %}" rel="stylesheet" media="screen">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+  <title>{% block title %} Welcome to Crypto {% endblock %}</title>
+
+  <style>
+    .small {
+      font-size: 0.875rem;
+      color: #4b4b4b;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  {% block content %}
+  {% endblock %}
+
+
+
+
+  {% block scripts%}
+  {% endblock scripts%}
+
+</body>
+
+</html>
