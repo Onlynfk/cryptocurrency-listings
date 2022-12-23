@@ -1,4 +1,4 @@
-# [Django Bitcoin Price listings using CoinMarketcap Api
+# [Django Bitcoin Price listings using CoinMarketcap Api] 
 
 - ✅ Responsive mobile first view
 -.✅ Background take to populate Django database with new updates from coinmarketcap API every 5 mins
@@ -41,16 +41,3 @@ $ # Start the app - custom port
 $ # python manage.py runserver 0.0.0.0:<your_port>
 $
 $ # Access the web app in browser: http://127.0.0.1:8000/
-```
-
-> Note: To use the app, please access the registration page and create a new user. After authentication, the app will unlock the private pages.
-
-<br />
-
-
-<br />
-
-
-
-
-```
