@@ -1,0 +1,158 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} Transactions {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <main class="content">
+
+        {% include 'includes/navigation.html' %}
+
+        <div class="preloader bg-soft flex-column justify-content-center align-items-center">
+            <img class="loader-element animate__animated animate__jackInTheBox"
+                 src="{% static 'assets/img/brand/light.svg' %}" height="60" alt="Volt logo">
+        </div>
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+            <div class="d-block mb-4 mb-md-0">
+               
+                <h2 class="h4">Recent Updates</h2>
+                <p class="mb-0">Crpyto Currency Updates.</p>
+            </div>
+
+            <div class="btn-toolbar mb-2 mb-md-0">
+                
+            </div>
+        </div>
+        <div style="text-align:center; width: 75%;">
+            <canvas id="pie-chart"></canvas>
+          </div>
+
+        <div class="table-settings mb-4">
+            <div class="row align-items-center justify-content-between">
+                <div class="col col-md-6 col-lg-3 col-xl-4">
+                    <form action="{% url 'transactions' %}" method="get">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon2"><span class="fas fa-search"></span></span>
+                            <input type="text" name="search" class="form-control" placeholder="Search">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-4 col-md-2 col-xl-1 pl-md-0 text-right">
+                    <div class="btn-group">
+                        <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="icon icon-sm icon-gray">
+                                <span class="fas fa-cog"></span>
+                            </span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-xs dropdown-menu-right">
+                            <span class="dropdown-item font-weight-bold text-dark">Show</span>
+                            <a class="dropdown-item d-flex font-weight-bold" href="#">10 <span
+                                    class="icon icon-small ml-auto"><span class="fas fa-check"></span></span></a>
+                            <a class="dropdown-item font-weight-bold" href="#">20</a>
+                            <a class="dropdown-item font-weight-bold" href="#">30</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card card-body border-light shadow-sm table-wrapper table-responsive pt-0">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Last updated</th>
+                    <th>Action</th>
+                  
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Item -->
+                {% if transactions is not True %}
+                    {% for transaction in transactions %}
+                        <tr class="item-row" data-edit="{% url 'transactions' transaction.id 'edit' %}"
+                            data-detail="{% url 'transactions' transaction.id %}">
+                            <td><span class="font-weight-bold">{{ transaction.id }}</span></td>
+                            <td><span class="font-weight-normal">{{ transaction.coin_name }}</span></td>
+                            <td><span class="font-weight-bold">${{ transaction.price }}</span></td>
+                            <td><span class="font-weight-normal">{{ transaction.last_updated|date:"d M Y" }}</span></td>
+
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="icon icon-sm">
+                                            <span class="fas fa-ellipsis-h icon-dark"></span>
+                                        </span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item edit_item"
+                                           href="{% url 'transactions' transaction.id 'edit' %}">
+                                            <span class="fas fa-edit mr-2"></span>Edit
+                                        </a>
+                                        <a class="dropdown-item text-danger delete_item"
+                                           data-href="{% url 'transactions' transaction.id %}">
+                                            <span class="fas fa-trash-alt mr-2"></span>Remove
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+
+            {{ transactions.pagination }}
+
+        </div>
+
+        {% include 'includes/footer.html' %}
+
+    </main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script type="text/javascript" src="{% static "javascript/main.js" %}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script>
+
+  var config = {
+    type: 'bar',
+    data: {
+      datasets: [{
+        data: {{ data|safe }},
+        backgroundColor: [
+          '#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3'
+        ],
+        label: 'USD Prices'
+      }],
+      labels: {{ labels|safe }}
+    },
+    options: {
+      responsive: true
+    }
+  };
+
+  window.onload = function() {
+    var ctx = document.getElementById('pie-chart').getContext('2d');
+    window.myPie = new Chart(ctx, config);
+  };
+
+</script>
+
+{% endblock javascripts %}
