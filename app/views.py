@@ -122,6 +122,9 @@ class TransactionView(View):
 
         transactions = CoinData.objects.order_by('-created_at')
 
+        if url_parameter == '':
+            transactions = CoinData.objects.order_by('-created_at')
+            
         if url_parameter:
             transactions = CoinData.objects.filter(coin_name__icontains=url_parameter)
             # print(all_coins)
