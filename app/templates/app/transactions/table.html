@@ -1,0 +1,48 @@
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Last updated</th>
+        <th>Action</th>
+      
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Item -->
+    {% if transactions is not True %}
+        {% for transaction in transactions %}
+            <tr class="item-row" data-edit="{% url 'transactions' transaction.id 'edit' %}"
+                data-detail="{% url 'transactions' transaction.id %}">
+                <td><span class="font-weight-bold">{{ transaction.id }}</span></td>
+                <td><span class="font-weight-normal">{{ transaction.coin_name }}</span></td>
+                <td><span class="font-weight-bold">${{ transaction.price }}</span></td>
+                <td><span class="font-weight-normal">{{ transaction.last_updated|date:"d M Y" }}</span></td>
+
+                <td>
+                    <div class="btn-group">
+                        <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="icon icon-sm">
+                                <span class="fas fa-ellipsis-h icon-dark"></span>
+                            </span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item edit_item"
+                               href="{% url 'transactions' transaction.id 'edit' %}">
+                                <span class="fas fa-edit mr-2"></span>Edit
+                            </a>
+                            <a class="dropdown-item text-danger delete_item"
+                               data-href="{% url 'transactions' transaction.id %}">
+                                <span class="fas fa-trash-alt mr-2"></span>Remove
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+    </tbody>
+</table>

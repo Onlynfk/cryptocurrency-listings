@@ -53,13 +53,15 @@ class TransactionView(View):
 
     def get(self, request, pk=None, action=None):
         if request.is_ajax():
-            if pk and action == 'edit':
+            if request.GET.get("q"):
+                return self.list(request) 
+            elif pk and action == 'edit':
                 edit_row = self.edit_row(pk)
                 return JsonResponse({'edit_row': edit_row})
             elif pk and not action:
                 edit_row = self.get_row_item(pk)
                 return JsonResponse({'edit_row': edit_row})
-
+            
         if pk and action == 'edit':
             context, template = self.edit(request, pk)
         else:
@@ -100,6 +102,7 @@ class TransactionView(View):
 
         ctx = {}
         url_parameter = request.GET.get("q")
+        print("url_parameter", url_parameter)
 
         queryset = CoinData.objects.order_by('-created_at')
         for coin in queryset:
@@ -124,6 +127,17 @@ class TransactionView(View):
             # print(all_coins)
         else:
             transactions = CoinData.objects.order_by('-created_at')
+        
+
+        is_ajax_request = request.headers.get("x-requested-with") == "XMLHttpRequest"
+
+        if is_ajax_request:
+
+            html = render_to_string(
+                template_name="app/transactions/table.html", context={"transactions": transactions}
+            )
+            data_dict = {"html_from_view": html}
+            return JsonResponse(data=data_dict, safe=False)
 
         self.context["labels"] = labels
         self.context["data"] = data

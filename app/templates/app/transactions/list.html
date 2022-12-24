@@ -35,11 +35,9 @@
         <div class="table-settings mb-4 mt-5">
             <div class="row align-items-center justify-content-between">
                 <div class="col col-md-6 col-lg-3 col-xl-4">
-                    <form action="{% url 'transactions' %}" method="get">
-                        <div class="input-group">
-                            <span class="input-group-text" id="basic-addon2"><span class="fas fa-search"></span></span>
-                            <input type="text" name="search" class="form-control" placeholder="Search">
-                        </div>
+                    <form class="form-inline d-flex align-items-center">
+                        <i id="search-icon" class="fas fa-search" aria-hidden="true"></i>
+                        <input id="user-input" class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search">
                     </form>
                 </div>
                 <div class="col-4 col-md-2 col-xl-1 pl-md-0 text-right">
@@ -64,55 +62,9 @@
         </div>
         
         <div class="card card-body border-light shadow-sm table-wrapper table-responsive pt-0">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Last updated</th>
-                    <th>Action</th>
-                  
-                </tr>
-                </thead>
-                <tbody>
-                <!-- Item -->
-                {% if transactions is not True %}
-                    {% for transaction in transactions %}
-                        <tr class="item-row" data-edit="{% url 'transactions' transaction.id 'edit' %}"
-                            data-detail="{% url 'transactions' transaction.id %}">
-                            <td><span class="font-weight-bold">{{ transaction.id }}</span></td>
-                            <td><span class="font-weight-normal">{{ transaction.coin_name }}</span></td>
-                            <td><span class="font-weight-bold">${{ transaction.price }}</span></td>
-                            <td><span class="font-weight-normal">{{ transaction.last_updated|date:"d M Y" }}</span></td>
-
-                            <td>
-                                <div class="btn-group">
-                                    <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span class="icon icon-sm">
-                                            <span class="fas fa-ellipsis-h icon-dark"></span>
-                                        </span>
-                                        <span class="sr-only">Toggle Dropdown</span>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item edit_item"
-                                           href="{% url 'transactions' transaction.id 'edit' %}">
-                                            <span class="fas fa-edit mr-2"></span>Edit
-                                        </a>
-                                        <a class="dropdown-item text-danger delete_item"
-                                           data-href="{% url 'transactions' transaction.id %}">
-                                            <span class="fas fa-trash-alt mr-2"></span>Remove
-                                        </a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                {% endif %}
-                </tbody>
-            </table>
-
+            <div id="replaceable-content">
+                {% include './table.html' %}
+            </div>
             {{ transactions.pagination }}
 
         </div>
@@ -125,8 +77,9 @@
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
+<script src="{% static 'app_assets/javascript/jquery-3.4.1.min.js' %}"></script>
 
-<script type="text/javascript" src="{% static "javascript/main.js" %}"></script>
+<script type="text/javascript" src="{% static 'app_assets/javascript/main.js' %}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 <script>
