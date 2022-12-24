@@ -124,5 +124,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'core/static'),
 )
+CRONJOBS = [
+    ('*/5 * * * *', 'django.core.management.call_command', ['api_script']),
+
+]
+
 #############################################################
 #############################################################

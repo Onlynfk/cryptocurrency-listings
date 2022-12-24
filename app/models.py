@@ -40,7 +40,7 @@ class Transaction(models.Model):
 class CoinData(models.Model):
     coinId = models.CharField(max_length=300, unique=True)
     coin_name = models.CharField(max_length=300, null=False, blank=False)
-    price = models.IntegerField(blank=True, null=True)
+    price =  models.DecimalField(max_digits=10, decimal_places=2, default=0)
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     last_updated = models.DateTimeField(null=True, blank=True)
 

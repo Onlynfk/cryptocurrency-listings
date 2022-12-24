@@ -98,10 +98,13 @@ class TransactionView(View):
         labels = []
         data = []
 
-        queryset = CoinData.objects.order_by('-created_at')[:5]
+        ctx = {}
+        url_parameter = request.GET.get("q")
+
+        queryset = CoinData.objects.order_by('-created_at')
         for coin in queryset:
             labels.append(coin.coin_name)
-            data.append(coin.price)
+            data.append(int(coin.price))
             filter_params = None
 
         search = request.GET.get('search')
@@ -114,7 +117,14 @@ class TransactionView(View):
                     else:
                         filter_params |= Q(bill_for__icontains=key.strip())
 
-        transactions = CoinData.objects.filter(filter_params) if filter_params else CoinData.objects.all()
+        transactions = CoinData.objects.order_by('-created_at')
+
+        if url_parameter:
+            transactions = CoinData.objects.filter(coin_name__icontains=url_parameter)
+            # print(all_coins)
+        else:
+            transactions = CoinData.objects.order_by('-created_at')
+
         self.context["labels"] = labels
         self.context["data"] = data
         self.context['transactions'], self.context['info'] = set_pagination(request, transactions)
@@ -153,7 +163,7 @@ class TransactionView(View):
     def update_instance(self, request, pk, is_urlencode=False):
         transaction = self.get_object(pk)
         form_data = QueryDict(request.body) if is_urlencode else request.POST
-        form = CoinData(form_data, instance=transaction)
+        form = CoinDataForm(form_data, instance=transaction)
         if form.is_valid():
             form.save()
             if not is_urlencode:

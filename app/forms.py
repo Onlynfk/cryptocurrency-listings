@@ -25,14 +25,13 @@ class TransactionForm(forms.ModelForm):
 class CoinDataForm(forms.ModelForm):
     coin_name = forms.CharField(label="Bill For", widget=forms.TextInput(attrs={'class': 'form-control transaction'}))
 
-    last_updated = forms.DateField(label="Issue Date", widget=forms.DateInput(
-        attrs={'class': 'form-control datepicker_input transaction', 'placeholder': 'yyyy-mm-dd'}))
-
     price = forms.DecimalField(label="Total", max_digits=10, decimal_places=2,
                                widget=forms.TextInput(
                                    attrs={'class': 'form-control transaction', 'placeholder': '...'}))
+    last_updated = forms.DateField(label="Issue Date", widget=forms.DateInput(
+        attrs={'class': 'form-control datepicker_input transaction', 'placeholder': 'yyyy-mm-dd'}))
 
 
     class Meta:
         model = CoinData
-        fields = ['coin_name', 'last_updated', 'price']
+        fields = ['coin_name','price', 'last_updated']

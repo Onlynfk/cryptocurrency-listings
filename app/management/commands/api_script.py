@@ -8,7 +8,7 @@ from app.models import CoinData
 
 
 url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest"
-parameters = {"start": "1", "limit": "10", "convert": "USD"}
+parameters = {"start": "1", "limit": "20", "convert": "USD"}
 headers = {
     "Accepts": "application/json",
     "X-CMC_PRO_API_KEY": "0e539491-b409-488c-9d70-072ccb3bc9e2",
@@ -37,6 +37,7 @@ class Command(BaseCommand):
                 coin_name = item["name"]
                 price = item["quote"]["USD"]["price"]
                 last_updated = item["quote"]["USD"]["last_updated"]
+                #print(price)
 
                 check_data_exists = CoinData.objects.filter(coinId=coin_id).first()
                 if check_data_exists is None:

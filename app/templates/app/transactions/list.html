@@ -32,7 +32,7 @@
             <canvas id="pie-chart"></canvas>
           </div>
 
-        <div class="table-settings mb-4">
+        <div class="table-settings mb-4 mt-5">
             <div class="row align-items-center justify-content-between">
                 <div class="col col-md-6 col-lg-3 col-xl-4">
                     <form action="{% url 'transactions' %}" method="get">
@@ -137,7 +137,7 @@
       datasets: [{
         data: {{ data|safe }},
         backgroundColor: [
-          '#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3'
+          '#3498DB', '#85C1E9', '#3498DB', '#3498DB', '#2874A6'
         ],
         label: 'USD Prices'
       }],

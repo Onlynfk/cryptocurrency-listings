@@ -11,10 +11,10 @@
     </td>
 {% else %}
     <td><span class="font-weight-bold">{{ instance.id }}</span></td>
-    <td><span class="font-weight-normal">{{ instance.bill_for }}</span></td>
-    <td><span class="font-weight-normal">{{ instance.issue_date|date:"d M Y" }}</span></td>
-    <td><span class="font-weight-normal">{{ instance.due_date|date:"d M Y" }}</span></td>
-    <td><span class="font-weight-bold">${{ instance.total }}</span></td>
+    <td><span class="font-weight-normal">{{ instance.coin_name }}</span></td>
+    <td><span class="font-weight-bold">${{ instance.price }}</span></td>
+    <td><span class="font-weight-normal">{{ instance.last_updated|date:"d M Y" }}</span></td>
+
     <td>
         <span class="font-weight-bold {{ instance.status_info.class }}">{{ instance.status }}</span>
     </td>
